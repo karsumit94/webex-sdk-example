@@ -13,7 +13,7 @@ echo "⚡️ Installing project dependencies..."
 npm install
 
 echo "🏋️ Building website..."
-npm run-script build
+npm run-script prod-build
 echo "npm build done"
 
 cd dist/webex-sdk-example
