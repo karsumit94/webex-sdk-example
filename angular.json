@@ -34,6 +34,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@momentum-ui/core/scss/momentum-ui.scss",
+              "node_modules/@momentum-ui/icons/scss/momentum-ui-icons.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.sass"
             ],
             "scripts": []
