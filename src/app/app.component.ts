@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
 import WebexSDK from 'webex';
 
@@ -10,6 +11,9 @@ import WebexSDK from 'webex';
 export class AppComponent implements OnInit {
   title = 'webex-sdk-example';
   webex: any
+  constructor(
+    public router: Router
+  ) { }
   ngOnInit(): void {
     console.log("Init method");
     this.webex = WebexSDK.init({
@@ -24,15 +28,10 @@ export class AppComponent implements OnInit {
         }
       }
     });
-    this.webex.once('ready', ()=>{
+    this.webex.once('ready', () => {
       console.log(this.webex.canAuthorize);
-      if (!this.webex.canAuthorize){
-        this.webex.authorization.initiateLogin();
-      }
-      if(this.webex.canAuthorize){
-        this.webex.people.get('me').then(data=>{
-          console.log(data.displayName);
-        })
+      if (!this.webex.canAuthorize) {
+        this.router.navigate(['/home']);
       }
     });
   }
