@@ -38,5 +38,9 @@ import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-s
 })
 export class AppModule { }
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  if (window.location.hostname == "localhost")
+    return new TranslateHttpLoader(http);
+  else {
+    return new TranslateHttpLoader(http,'./webex-sdk-example/assets/i18n/','.json');
+  }
 }
