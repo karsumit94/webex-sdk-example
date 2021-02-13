@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { environment } from 'src/environments/environment';
 import { TranslateService } from "@ngx-translate/core";
 import { DeviceDetectorService } from 'ngx-device-detector';
-import WebexSDK from 'webex';
+
 
 export const DEFAULT_LANG = "en";
 @Component({
@@ -12,8 +11,7 @@ export const DEFAULT_LANG = "en";
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  title = 'webex-sdk-example';
-  webex: any
+  title = 'Webex SDK Example';
   locale: string;
   constructor(
     public router: Router,
@@ -34,25 +32,6 @@ export class AppComponent implements OnInit {
       ) {
         this.translate.use(this.locale);
         sessionStorage.setItem("locale", this.locale);
-      }
-    });
-    console.log("Init method");
-    this.webex = WebexSDK.init({
-      config: {
-        meetings: {
-          deviceType: 'WEB'
-        },
-        credentials: {
-          client_id: environment.client_id,
-          redirect_uri: environment.redirect_uri,
-          scope: environment.scope
-        }
-      }
-    });
-    this.webex.once('ready', () => {
-      console.log(this.webex.canAuthorize);
-      if (!this.webex.canAuthorize) {
-        this.router.navigate(['/home'], { skipLocationChange: true });
       }
     });
   }

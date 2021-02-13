@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-supported.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-s
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    MobileNotSupportedComponent
+    MobileNotSupportedComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +40,5 @@ import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-s
 })
 export class AppModule { }
 export function HttpLoaderFactory(http: HttpClient) {
-  if (window.location.hostname == "localhost")
-    return new TranslateHttpLoader(http);
-  else {
-    return new TranslateHttpLoader(http,'./webex-sdk-example/assets/i18n/','.json');
-  }
+    return new TranslateHttpLoader(http,'./assets/i18n/','.json');
 }

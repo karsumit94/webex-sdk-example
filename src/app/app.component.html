@@ -5,12 +5,14 @@
                 <div class="row header-full-height">
                     <app-header></app-header>
                 </div>
-                <div class="row content-full-height">
-                    <div *ngIf='isMobile()'>
-                        <app-mobile-not-supported></app-mobile-not-supported>
-                    </div>
-                    <div *ngIf='!isMobile()'>
-                        <router-outlet></router-outlet>
+                <div class="row content-full-height elevation-2">
+                    <div class="medium-12">
+                        <div *ngIf='isMobile()'>
+                            <app-mobile-not-supported></app-mobile-not-supported>
+                        </div>
+                        <div *ngIf='!isMobile()'>
+                            <router-outlet></router-outlet>
+                        </div>
                     </div>
                 </div>
                 <div class="row footer-full-height">

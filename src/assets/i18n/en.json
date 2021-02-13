@@ -1,3 +1,5 @@
 {
-    "mobile_not_supported": "Mobile device is officially not yet."
+    "mobile_not_supported": "Mobile device is officially not supported yet.",
+    "login":"Login",
+    "not_found": "Sorry, you landed on a wrong page. Please try again."
 }
