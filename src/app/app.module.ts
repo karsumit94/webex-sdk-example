@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-supported.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { WebexComponent } from './webex/webex.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FooterComponent,
     HeaderComponent,
     MobileNotSupportedComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    WebexComponent
   ],
   imports: [
     BrowserModule,
