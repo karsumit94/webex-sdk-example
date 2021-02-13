@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     this.webex.once('ready', () => {
       console.log(this.webex.canAuthorize);
       if (!this.webex.canAuthorize) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home'], { skipLocationChange: true });
       }
     });
   }
