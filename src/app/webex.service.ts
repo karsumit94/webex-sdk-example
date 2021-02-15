@@ -9,6 +9,12 @@ import WebexSDK from 'webex';
 export class WebexService {
   webex: any;
   currentRoom: any;
+  token: string;
+  registered: boolean;
+  syncStatus: string;
+  currentMeeting: any;
+  destination: string;
+
   constructor( public router: Router) { }
   onBeforeLogin() {
     this.webex = WebexSDK.init({
@@ -82,6 +88,46 @@ export class WebexService {
   }
 
   async fetchUserDetails() {
-      return this.webex.people.get('me');
+    return this.webex.people.get('me');
+  }
+
+  async onRegister() {
+    try {
+      await this.webex.meetings.register();
+      this.registered = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async onUnregister() {
+    try {
+      await this.webex.meetings.unregister();
+      this.registered = false;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async onSyncMeetings() {
+    try {
+      this.syncStatus = 'SYNCING';
+      await this.webex.meetings.syncMeetings();
+      this.syncStatus = 'SYNCED';
+    } catch (error) {
+      this.syncStatus = 'ERROR';
+      console.error(error);
+    }
+  }
+  async onCreateMeeting(destination) {
+    try {
+      this.currentMeeting = await this.webex.meetings.create(destination);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  printMeeting() {
+    if(this.currentMeeting) {
+      return this.currentMeeting.id;
+    }
+    return 'No Meeting';
   }
 }
