@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import WebexSDK from 'webex';
 
@@ -14,8 +15,10 @@ export class WebexService {
   syncStatus: string;
   currentMeeting: any;
   destination: string;
+  subject: Subject<any> = new Subject()
 
   constructor( public router: Router) { }
+
   onBeforeLogin() {
     this.webex = WebexSDK.init({
       config: {
@@ -59,6 +62,14 @@ export class WebexService {
     return this.webex.rooms.list();
   }
 
+  async getRoom(id: string) {
+    return this.webex.rooms.get(id)
+  }
+
+  async getPeople(id: string) {
+    return this.webex.people.get(id)
+  }
+
   async listenForWebex() {
     this.webex.once(`ready`, () => {
       console.log('READY', this.webex.credentials.supertoken);
@@ -72,6 +83,9 @@ export class WebexService {
     this.webex.authorization.initiateLogin();
   }
 
+  isAuthorized(): boolean {
+    return this.webex.canAuthorize || false;
+  }
 
   onLogout() {
     if (this.webex) {
@@ -97,12 +111,32 @@ export class WebexService {
       roomId: roomid
     });
   }
+
+  async listPeople(searchText: string, shouldFetchAll: boolean = false) {
+    return this.webex.people.list({displayName: searchText, showAllTypes: shouldFetchAll})
+  }
+
+  async leaveRoom(id: string) {
+    return this.webex.rooms.remove(id);
+  }
+
   async sendMsg (roomid, msg){
     return this.webex.messages.create({
       text: msg,
       roomId: roomid
     });
+  }
 
+  async onListMessages(roomId: string) {
+    return this.webex.messages.list({roomId: roomId})
+  }
+
+  async onListenRoom() {
+    return this.webex.rooms.listen()
+  }
+
+  receiveNewMessage(): Observable<any> {
+    return this.subject.asObservable();
   }
 
   async onRegister() {
@@ -143,5 +177,13 @@ export class WebexService {
       return this.currentMeeting.id;
     }
     return 'No Meeting';
+  }
+
+  listenForMsgEvents() {
+    this.webex.messages.listen().then(() => {
+      console.log('listening to message events');
+      this.webex.messages.on('created', (event) => this.subject.next({webexEvent: 'msgCreated', event}));
+      this.webex.messages.on('deleted', (event) => this.subject.next({webexEvent: 'msgDeleted', event}));
+    })
   }
 }
