@@ -12,7 +12,13 @@ export class WebexComponent implements OnInit {
   constructor(private webex: WebexService, public router: Router) { }
   ngOnInit(): void {
     this.webex.onInit();
-    this.webex.fetchUserDetails();
+    this.webex.onListRoom().then((rooms) => {
+      console.log(rooms)
+    });
+    this.webex.fetchUserDetails().then((data) => {
+      console.log(data);
+      this.displayName = data.displayName;
+    });
   }
 
 }

@@ -80,9 +80,6 @@ export class WebexService {
   }
 
   async fetchUserDetails() {
-    this.webex.people.get('me').then(data => {
-      console.log(data.displayName);
-      return data.displayName;
-    });
+      return this.webex.people.get('me');
   }
 }
