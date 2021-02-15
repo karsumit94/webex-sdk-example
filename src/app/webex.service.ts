@@ -91,6 +91,20 @@ export class WebexService {
     return this.webex.people.get('me');
   }
 
+  async addPeople(email, roomid) {
+    return this.webex.memberships.create({
+      personEmail: email,
+      roomId: roomid
+    });
+  }
+  async sendMsg (roomid, msg){
+    return this.webex.messages.create({
+      text: msg,
+      roomId: roomid
+    });
+
+  }
+
   async onRegister() {
     try {
       await this.webex.meetings.register();

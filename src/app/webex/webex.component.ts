@@ -11,20 +11,14 @@ export class WebexComponent implements OnInit {
   displayName: string;
   roomName: string;
   roomsList: any;
-  roomsNameList: any;
   
   constructor(private webex: WebexService, public router: Router) { }
   ngOnInit(): void {
-    this.roomsNameList = [];
     this.webex.onInit();
     this.webex.onListRoom().then((rooms) => {
       console.log("Printing rooms")
       console.log(rooms.items);
       this.roomsList = rooms.items;
-      for (var i = 0; i < this.roomsList.length; i++) {
-        this.roomsNameList.push(this.roomsList[i].title);
-      }
-      console.log(this.roomsNameList);
     });
     this.webex.fetchUserDetails().then((data) => {
       console.log(data);
@@ -39,5 +33,19 @@ export class WebexComponent implements OnInit {
     if(this.roomName) {
       this.webex.onCreateRoom(this.roomName)
     }
+  }
+  addPeople(space){
+    console.log("add people");
+    console.log(space)
+    var email = prompt("Please enter email of the person you want to add!", "sumkar@cisco.com");
+    this.webex.addPeople(email,space.id)
+  }
+
+  sendMsg(space){
+    console.log("Send msg");
+    console.log(space)
+    var msg = prompt("Enter a Message", "Hello!");
+    this.webex.sendMsg(space.id,msg)
+
   }
 }

@@ -1,6 +1,6 @@
 <div class="row padding-15  ">
     <div class="medium-8 columns">{{'howdy' | translate}}, {{this.displayName}}!</div>
-    
+
     <div class="medium-2 columns right-align"><a [routerLink]="" (click)="logout()">{{'logout' | translate}}</a></div>
 </div>
 <div class="row padding-15 ">
@@ -9,5 +9,16 @@
     </div>
     <div class="medium-4 end columns">
         <button type="button" class="md-button md-button--blue" (click)="createRoom()">Create Room</button>
+    </div>
+</div>
+<div class="row padding-15 ">
+    Room List
+    <div *ngFor="let a of roomsList; let index = index">
+        <div *ngIf='roomsList[index].type == "group"'>
+            <li class="space-list"><span>{{roomsList[index].title}}</span><span><a (click)="addPeople(roomsList[index])">Add
+                        People</a></span>
+                <span><a (click)="sendMsg(roomsList[index])">Send Message</a></span>
+            </li>
+        </div>
     </div>
 </div>
