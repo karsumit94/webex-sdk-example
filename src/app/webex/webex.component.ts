@@ -9,6 +9,7 @@ import { WebexService } from '../webex.service';
 })
 export class WebexComponent implements OnInit {
   displayName: string;
+  roomName: string;
   constructor(private webex: WebexService, public router: Router) { }
   ngOnInit(): void {
     this.webex.onInit();
@@ -25,4 +26,9 @@ export class WebexComponent implements OnInit {
     this.webex.onLogout();
   }
 
+  createRoom() {
+    if(this.roomName) {
+      this.webex.onCreateRoom(this.roomName)
+    }
+  }
 }

@@ -13,6 +13,9 @@ import { HeaderComponent } from './header/header.component';
 import { MobileNotSupportedComponent } from './mobile-not-supported/mobile-not-supported.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { WebexComponent } from './webex/webex.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { WebexComponent } from './webex/webex.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    FormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

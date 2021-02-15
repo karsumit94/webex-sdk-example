@@ -1,4 +1,13 @@
 <div class="row padding-15  ">
     <div class="medium-8 columns">{{'howdy' | translate}}, {{this.displayName}}!</div>
-    <div class="medium-4 columns right-align"><a [routerLink]="" (click)="logout()">{{'logout' | translate}}</a></div>
+    
+    <div class="medium-2 columns right-align"><a [routerLink]="" (click)="logout()">{{'logout' | translate}}</a></div>
+</div>
+<div class="row padding-15 ">
+    <div class="medium-4 columns">
+        <input placeholder="Enter the Room name" [(ngModel)]="roomName">
+    </div>
+    <div class="medium-4 end columns">
+        <button type="button" class="md-button md-button--blue" (click)="createRoom()">Create Room</button>
+    </div>
 </div>

@@ -45,7 +45,7 @@ export class WebexService {
       this.currentRoom = await this.webex.rooms.create({ title: name });
       alert('Your room has been created');
     } catch (error) {
-      window.alert(error);
+      console.log(error);
     }
   }
 
@@ -65,6 +65,7 @@ export class WebexService {
   onLogin() {
     this.webex.authorization.initiateLogin();
   }
+
 
   onLogout() {
     if (this.webex) {
