@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WebexService } from "../webex.service";
+import { WebexService } from '../webex.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
   constructor(private webex: WebexService, public router: Router) { }
 
   ngOnInit(): void {
-    this.webex.onBeforeLogin()
+    this.webex.onBeforeLogin();
   }
 
   doLogin() {
-    this.webex.onLogin()
+    this.webex.onLogin();
   }
 
 }

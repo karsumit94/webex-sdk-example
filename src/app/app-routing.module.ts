@@ -6,10 +6,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { WebexComponent } from './webex/webex.component';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "home", component: HomeComponent, pathMatch: "full" },
-  { path: "webex", component: WebexComponent },
-  { path: "404", component: NotFoundComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent, pathMatch: 'full' },
+  { path: 'webex', component: WebexComponent },
+  { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '404' }
 ];
 

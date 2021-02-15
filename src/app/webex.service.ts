@@ -6,7 +6,7 @@ import WebexSDK from 'webex';
   providedIn: 'root'
 })
 export class WebexService {
-  webex: any
+  webex: any;
   currentRoom: any;
 
   onBeforeLogin() {
@@ -21,8 +21,8 @@ export class WebexService {
           scope: environment.scope
         }
       }
-    })
-    this.listenForWebex()
+    });
+    this.listenForWebex();
   }
 
   onInit() {
@@ -35,53 +35,54 @@ export class WebexService {
       credentials: {
         access_token: localStorage.getItem('webex_token')
       }
-    })
-    this.listenForWebex()
+    });
+    this.listenForWebex();
   }
 
   async onCreateRoom(name: string) {
     try {
-      this.currentRoom = await this.webex.rooms.create({ title: name })
-      alert("Your room has been created")
+      this.currentRoom = await this.webex.rooms.create({ title: name });
+      alert('Your room has been created');
     } catch (error) {
       window.alert(error);
     }
   }
 
   async onListRoom() {
-    return this.webex.rooms.list()
+    return this.webex.rooms.list();
   }
 
   async listenForWebex() {
     this.webex.once(`ready`, () => {
-      console.log("READY", this.webex.credentials.supertoken)
+      console.log('READY', this.webex.credentials.supertoken);
       if (this.webex.credentials.supertoken) {
-        localStorage.setItem('webex_token', this.webex.credentials.supertoken.access_token)
+        localStorage.setItem('webex_token', this.webex.credentials.supertoken.access_token);
       }
     });
   }
 
   onLogin() {
-    this.webex.authorization.initiateLogin()
+    this.webex.authorization.initiateLogin();
   }
 
   onLogout() {
     if (this.webex) {
       if (this.webex.canAuthorize) {
-        console.log('Already Logged in')
+        console.log('Already Logged in');
         this.webex.logout();
       }
       else {
         this.webex.logout();
-        console.log('Cannot logout when no user is authenticated')
+        console.log('Cannot logout when no user is authenticated');
       }
-      localStorage.removeItem('webex_token')
+      localStorage.removeItem('webex_token');
     }
   }
 
   async fetchUserDetails() {
     this.webex.people.get('me').then(data => {
       console.log(data.displayName);
-    })
+      return data.displayName;
+    });
   }
 }

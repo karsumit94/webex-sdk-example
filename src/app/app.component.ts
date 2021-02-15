@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 
-export const DEFAULT_LANG = "en";
+export const DEFAULT_LANG = 'en';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,19 +24,19 @@ export class AppComponent implements OnInit {
    }
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.locale = params["locale"];
+      this.locale = params.locale;
       if (
         this.locale !== undefined &&
-        this.locale !== "undefined" &&
+        this.locale !== 'undefined' &&
         this.isValidLanguage(this.locale)
       ) {
         this.translate.use(this.locale);
-        sessionStorage.setItem("locale", this.locale);
+        sessionStorage.setItem('locale', this.locale);
       }
     });
   }
   isValidLanguage(locale: string) {
-    const arr = ["en"];
+    const arr = ['en'];
     return arr.includes(locale);
   }
   isMobile() {

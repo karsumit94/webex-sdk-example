@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WebexService } from "../webex.service";
+import { WebexService } from '../webex.service';
 
 @Component({
   selector: 'app-webex',
@@ -8,10 +8,11 @@ import { WebexService } from "../webex.service";
   styleUrls: ['./webex.component.sass']
 })
 export class WebexComponent implements OnInit {
+  displayName: string;
   constructor(private webex: WebexService, public router: Router) { }
   ngOnInit(): void {
     this.webex.onInit();
-    this.webex.fetchUserDetails()
+    this.webex.fetchUserDetails();
   }
 
 }
