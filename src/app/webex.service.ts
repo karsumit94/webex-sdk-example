@@ -7,10 +7,9 @@ import WebexSDK from 'webex';
 })
 export class WebexService {
   webex: any
-  currentRoom: any
-  constructor() { }
+  currentRoom: any;
 
-  beforeLogin() {
+  onBeforeLogin() {
     this.webex = WebexSDK.init({
       config: {
         meetings: {
@@ -23,11 +22,10 @@ export class WebexService {
         }
       }
     })
-    this.listenForWebexResponse()
-    this.webex.authorization.initiateLogin()
+    this.listenForWebex()
   }
 
-  checkForLogin() {
+  onInit() {
     this.webex = WebexSDK.init({
       config: {
         meetings: {
@@ -38,7 +36,7 @@ export class WebexService {
         access_token: localStorage.getItem('webex_token')
       }
     })
-    this.listenForWebexResponse()
+    this.listenForWebex()
   }
 
   async onCreateRoom(name: string) {
@@ -54,7 +52,7 @@ export class WebexService {
     return this.webex.rooms.list()
   }
 
-  async listenForWebexResponse() {
+  async listenForWebex() {
     this.webex.once(`ready`, () => {
       console.log("READY", this.webex.credentials.supertoken)
       if (this.webex.credentials.supertoken) {
@@ -81,9 +79,9 @@ export class WebexService {
     }
   }
 
-  fetchUserDetails () {
-    this.webex.people.get('me').then(data=>{
-      console.log(data);
+  async fetchUserDetails() {
+    this.webex.people.get('me').then(data => {
+      console.log(data.displayName);
     })
   }
 }
