@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('webex_token') !== null) {
+      console.log(localStorage.getItem('webex_token'));
       this.webex = WebexSDK.init({
         config: {
           meetings: {
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
   waitForWebex() {
     this.webex.once('ready', () => {
       console.log("READY", this.webex.credentials.supertoken)
-      console.log("canAuthorize:" + this.webex.canAuthorize);
+      console.log("canAuthorize: " + this.webex.canAuthorize);
       if (this.webex.canAuthorize) {
         this.router.navigate(['/webex'], { skipLocationChange: true });
       }

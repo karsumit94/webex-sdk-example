@@ -26,15 +26,15 @@ export class WebexComponent implements OnInit {
     });
     console.log("canAuthorize: " + this.webex.canAuthorize);
     console.log("Webex SDK init complete");
-    // this.webex.once('ready', () => {
-    //   console.log("Webex SDK ready");
-    //   if (this.webex.credentials.supertoken) {
-    //     console.log(this.webex.credentials.supertoken.access_token);
-    //     localStorage.setItem('webex_token', this.webex.credentials.supertoken.access_token);
-    //   }
-    //   if(this.webex.canAuthorize){
-    //     console.log("canAuthorize");
-    //   }
-    // });
+    this.webex.once('ready', () => {
+      console.log("Webex SDK ready");
+      if (this.webex.credentials.supertoken) {
+        console.log(this.webex.credentials.supertoken.access_token);
+        localStorage.setItem('webex_token', this.webex.credentials.supertoken.access_token);
+      }
+      if(this.webex.canAuthorize){
+        console.log("canAuthorize: "+ this.webex.canAuthorize);
+      }
+    });
   }
 }
