@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   client_id: 'C0b08118d8c67829fd3b18ef286771cd438312a7367e3fbe0b16e3dd6000de7ac',
   redirect_uri: 'http://localhost:4200/webex',
+  client_secret: 'fd6cb6d4679d734524faa80b24ddbed5a44a3ac59e3a6e7ecdefb6ce1af41628',
   scope: 'spark:all spark:kms'
 };
 

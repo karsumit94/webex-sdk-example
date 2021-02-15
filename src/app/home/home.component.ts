@@ -13,19 +13,21 @@ export class HomeComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
-    this.webex = WebexSDK.init({
-      config: {
-        meetings: {
-          deviceType: 'WEB'
-        },
-        credentials: {
-          access_token: localStorage.getItem('webex_token')
+    if (localStorage.getItem('webex_token') !== null) {
+      this.webex = WebexSDK.init({
+        config: {
+          meetings: {
+            deviceType: 'WEB'
+          },
+          credentials: {
+            access_token: localStorage.getItem('webex_token')
+          }
         }
-      }
-    });
-    this.waitForWebex()
+      });
+      this.waitForWebex()
+    }
   }
-  async waitForWebex() {
+  waitForWebex() {
     this.webex.once('ready', () => {
       console.log("READY", this.webex.credentials.supertoken)
       console.log("canAuthorize:" + this.webex.canAuthorize);
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+    this.waitForWebex();
     this.webex.authorization.initiateLogin();
   }
 
