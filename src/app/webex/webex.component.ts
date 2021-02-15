@@ -13,12 +13,16 @@ export class WebexComponent implements OnInit {
   ngOnInit(): void {
     this.webex.onInit();
     this.webex.onListRoom().then((rooms) => {
-      console.log(rooms)
+      console.log("Printing rooms")
+      console.log(JSON.stringify(rooms));
     });
     this.webex.fetchUserDetails().then((data) => {
       console.log(data);
       this.displayName = data.displayName;
     });
+  }
+  logout() {
+    this.webex.onLogout();
   }
 
 }

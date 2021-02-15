@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private webex: WebexService, public router: Router) { }
 
   ngOnInit(): void {
+    this.webex.onInit();
     this.webex.onBeforeLogin();
   }
 

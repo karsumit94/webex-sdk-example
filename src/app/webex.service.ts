@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 import WebexSDK from 'webex';
 
 @Injectable({
@@ -8,7 +9,7 @@ import WebexSDK from 'webex';
 export class WebexService {
   webex: any;
   currentRoom: any;
-
+  constructor( public router: Router) { }
   onBeforeLogin() {
     this.webex = WebexSDK.init({
       config: {
